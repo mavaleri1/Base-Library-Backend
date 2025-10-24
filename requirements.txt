@@ -1,0 +1,42 @@
+# Core dependencies
+fastapi>=0.116.1
+fuzzysearch>=0.8.0
+httpx>=0.28.1
+jinja2>=3.1.6
+langchain>=0.3.27
+langchain-openai>=0.3.28
+langgraph>=0.6.3
+langgraph-checkpoint-postgres>=2.0.23
+pillow>=11.3.0
+pydantic>=2.11.7
+pydantic-settings>=2.10.1
+python-multipart>=0.0.20
+uvicorn>=0.35.0
+
+# Artifacts service dependencies
+markdown>=3.5
+python-markdown-math>=0.8
+pdfkit>=1.0.0
+aiofiles>=23.2.1
+sqlalchemy>=2.0.0
+alembic>=1.13.0
+asyncpg>=0.29.0
+psycopg2-binary>=2.9.9
+python-jose[cryptography]>=3.3.0
+
+# Web3 authentication dependencies
+eth-account>=0.10.0
+web3>=6.0.0
+pyjwt>=2.8.0
+
+# Prompt config service dependencies
+pyyaml>=6.0.2
+
+# Development dependencies (optional)
+black>=25.1.0
+mypy>=1.17.1
+ruff>=0.12.7
+types-pyyaml>=6.0.12.20250809
+pytest>=8.4.1
+pytest-asyncio>=1.1.0
+ipykernel>=6.30.1

@@ -1,0 +1,559 @@
+# Initial seed data for prompt configuration service
+# This file contains the base placeholders and profiles needed for the system to function
+default_values:
+  expert_role: advanced_level
+  subject_name: ai_llm
+  subject_keywords: ai_llm_keywords
+  language: english
+  style: comprehensive_detailed
+  target_audience_inline: researchers
+  target_audience_block: researchers_block
+  material_type_inline: lecture_notes
+  material_type_block: lecture_notes_block
+  explanation_depth: deep_technical
+  topic_coverage: exhaustive_coverage
+  question_formats: open_ended
+  question_purpose: verify_understanding_block
+  question_purpose_inline: verify_understanding
+  question_quantity: qty_3
+
+placeholders:
+  - display_name: Expert role
+    name: expert_role
+    description: Role of the teacher or expert for creating material
+    values:
+      - display_name: Advanced
+        name: advanced_level
+        value: academic professor with deep theoretical foundation
+        
+      - display_name: Intermediate 
+        name: intermediate_level
+        value: industry expert with deep practical understanding and applied knowledge
+        
+      - display_name: Beginner
+        name: beginner_level
+        value: experienced educator skilled in clear explanations and breaking down complex concepts
+
+  - display_name: Subject Area
+    name: subject_name
+    description: Main topic or field of study
+    values:
+      - display_name: Mathematics
+        name: mathematics
+        value: mathematics
+
+      - display_name: Frontend Development
+        name: frontend_development
+        value: frontend development
+        
+      - display_name: Backend Development
+        name: backend_development
+        value: backend development
+
+      - display_name: Cryptography
+        name: cryptography
+        value: cryptography
+
+      - display_name: Machine Learning
+        name: machine_learning
+        value: machine learning
+        
+      - display_name: AI and Large Language Models
+        name: ai_llm
+        value: AI and large language models
+
+      - display_name: Physics
+        name: physics
+        value: physics
+
+      - display_name: Chemistry
+        name: chemistry
+        value: chemistry
+
+      - display_name: Biology
+        name: biology
+        value: biology
+
+      - display_name: Computer Science
+        name: computer_science
+        value: computer science
+
+      - display_name: Data Science
+        name: data_science
+        value: data science
+
+  - display_name: Subject Keywords
+    name: subject_keywords
+    description: Key terms and concepts of the subject area
+    values:
+      - display_name: Cryptography
+        name: crypto_keywords
+        value: encryption, hashing, digital signatures, PKI, SSL/TLS, symmetric/asymmetric cryptography, key exchange, cryptanalysis, blockchain, zero-knowledge proofs
+        
+      - display_name: Mathematics
+        name: math_keywords
+        value: calculus, linear algebra, discrete mathematics, probability theory, differential equations, numerical methods, optimization, graph theory, mathematical proofs, statistics
+        
+      - display_name: Machine Learning
+        name: ml_keywords
+        value: neural networks, deep learning, supervised/unsupervised learning, reinforcement learning, transformers, CNNs, RNNs, gradient descent, backpropagation, model evaluation
+        
+      - display_name: Frontend Development
+        name: frontend_keywords
+        value: React, Vue, Angular, JavaScript/TypeScript, HTML/CSS, responsive design, state management, component architecture, browser APIs, performance optimization
+        
+      - display_name: Backend Development
+        name: backend_keywords
+        value: REST/GraphQL APIs, databases, microservices, authentication/authorization, caching, message queues, containerization, CI/CD, system design, scalability
+        
+      - display_name: AI and Large Language Models
+        name: ai_llm_keywords
+        value: LLM, AI, GPT, agents, Claude, Llama, transformers, self-attention, prompt engineering, fine-tuning, RLHF, RAG, tokenization, context windows, few-shot learning, chain-of-thought
+
+      - display_name: Physics
+        name: physics_keywords
+        value: mechanics, thermodynamics, electromagnetism, quantum mechanics, relativity, waves, optics, particle physics, nuclear physics, astrophysics, classical mechanics, statistical mechanics, field theory
+
+      - display_name: Chemistry
+        name: chemistry_keywords
+        value: organic chemistry, inorganic chemistry, physical chemistry, biochemistry, analytical chemistry, chemical bonds, molecular structure, chemical reactions, thermodynamics, kinetics, spectroscopy, catalysis, polymers
+
+      - display_name: Biology
+        name: biology_keywords
+        value: cell biology, genetics, molecular biology, evolution, ecology, anatomy, physiology, biochemistry, microbiology, immunology, neuroscience, developmental biology, biotechnology, bioinformatics
+
+      - display_name: Computer Science
+        name: computer_science_keywords
+        value: algorithms, data structures, computational complexity, software engineering, computer architecture, operating systems, networks, databases, programming languages, artificial intelligence, computer graphics, human-computer interaction
+
+      - display_name: Data Science
+        name: data_science_keywords
+        value: statistics, data analysis, data visualization, machine learning, big data, data mining, predictive modeling, statistical inference, data preprocessing, feature engineering, model evaluation, business intelligence, data pipelines
+
+  - display_name: Language
+    name: language
+    description: Language for creating content
+    values: 
+      - display_name: English
+        name: english
+        value: english
+        
+      - display_name: English Technical
+        name: english_tech
+        value: english technical language
+
+  - display_name: Writing Style
+    name: style
+    description: Style and manner of presentation
+    values:
+      - display_name: Comprehensive Explanation
+        name: comprehensive_detailed
+        value: comprehensive with detailed explanations
+      - display_name: Step-by-Step from Basics to Advanced
+        name: step_by_step
+        value: step-by-step progression from fundamentals to advanced concepts
+      - display_name: Structured Modular Presentation
+        name: structured_modular
+        value: structured modular presentation with clear logical flow
+      - display_name: Conceptual Understanding Focus
+        name: conceptual_focused
+        value: conceptual understanding focused with emphasis on why and how
+      - display_name: Academically Rigorous with Formal Definitions
+        name: academic_rigorous
+        value: academic rigorous with formal definitions
+
+  - display_name: Target Audience (inline)
+    name: target_audience_inline
+    description: Audience for which the material is created
+    values:
+      - display_name: Complete Beginners
+        name: complete_beginners
+        value: complete beginners without prerequisites
+        
+      - display_name: University Students
+        name: university_students
+        value: university students with fundamentals
+        
+      - display_name: Intermediate Specialists
+        name: intermediate_specialists
+        value: specialists with foundational understanding seeking deeper conceptual knowledge
+        
+      - display_name: Advanced Practitioners
+        name: advanced_practitioners
+        value: advanced practitioners requiring comprehensive theoretical understanding
+        
+      - display_name: Researchers
+        name: researchers
+        value: researchers requiring theoretical depth
+
+  - display_name: Target Audience (block)
+    name: target_audience_block
+    description: Audience for material creation (block format)
+    values:
+      - display_name: Complete Beginners
+        name: complete_beginners_block
+        value: Complete beginners with no prior knowledge. Assume zero prerequisites. Explain every term and concept from scratch. Use clear language and logical progression.
+        
+      - display_name: University Students
+        name: university_students_block
+        value: University students with fundamental knowledge in the subject area. Can handle abstract concepts and formal notation. Ready for systematic theoretical exploration.
+        
+      - display_name: Intermediate Specialists
+        name: intermediate_specialists_block
+        value: Specialists with foundational understanding seeking deeper conceptual mastery. Focus on explaining not just what but how and why things work. Build comprehensive mental models and theoretical frameworks.
+        
+      - display_name: Advanced Practitioners
+        name: advanced_practitioners_block
+        value: Advanced practitioners requiring thorough theoretical understanding. Expect detailed explanations of underlying principles and mechanisms. Need comprehensive coverage with formal rigor.
+        
+      - display_name: Researchers
+        name: researchers_block
+        value: Researchers and academics requiring rigorous theoretical foundation. Expect formal definitions, mathematical proofs, and thorough analysis. Need comprehensive coverage including edge cases.
+
+  - display_name: Material Type (inline)
+    name: material_type_inline
+    description: Format of the created material
+    values:
+      - display_name: Comprehensive Theoretical Materials
+        name: comprehensive_study
+        value: comprehensive theoretical study materials
+        
+      - display_name: Structured Lecture Notes
+        name: lecture_notes
+        value: structured lecture notes with key concepts
+        
+      - display_name: In-Depth Theoretical Analysis
+        name: theoretical_analysis
+        value: in-depth theoretical analysis and exploration
+        
+      - display_name: Conceptual Overview with Relationships
+        name: conceptual_overview
+        value: conceptual overview with relationships and frameworks
+        
+      - display_name: Systematic Exposition of Principles
+        name: systematic_exposition
+        value: systematic exposition of fundamental principles
+
+  - display_name: Material Type (block)
+    name: material_type_block
+    description: Format of the created material (block format)
+    values:
+      - display_name: Comprehensive Theoretical Materials
+        name: comprehensive_study_block
+        value: Comprehensive theoretical study materials with detailed explanations and systematic coverage. Build deep understanding through thorough exploration of concepts and principles.
+        
+      - display_name: Structured Lecture Notes
+        name: lecture_notes_block
+        value: Structured lecture notes optimized for learning and retention. Use clear headings, bullet points for key concepts, highlighted definitions, and logical flow between topics.
+        
+      - display_name: In-Depth Theoretical Analysis
+        name: theoretical_analysis_block
+        value: In-depth theoretical analysis exploring fundamental mechanisms and principles. Provide rigorous examination of concepts with formal definitions and systematic reasoning.
+        
+      - display_name: Conceptual Overview with Relationships
+        name: conceptual_overview_block
+        value: Conceptual overview establishing mental models and theoretical frameworks. Map relationships between concepts and build comprehensive understanding of the domain.
+        
+      - display_name: Systematic Exposition of Principles
+        name: systematic_exposition_block
+        value: Systematic exposition of fundamental principles and theoretical foundations. Present material in logical sequence with clear derivations and conceptual development.
+
+  - display_name: Depth of Explanation
+    name: explanation_depth
+    description: Level of detail in explanations
+    values:
+      - display_name: Surface-Level Overview
+        name: surface_level
+        value: surface level overview focusing on key concepts and terminology
+        
+      - display_name: Intermediate Depth with Mechanisms
+        name: intermediate_depth
+        value: intermediate depth explaining mechanisms and causal relationships
+        
+      - display_name: Deep Technical Understanding
+        name: deep_technical
+        value: deep technical exploration of how and why things work
+        
+      - display_name: Comprehensive Theoretical Analysis
+        name: comprehensive_analysis
+        value: comprehensive analysis with thorough theoretical foundations
+        
+      - display_name: Mathematical Rigor
+        name: mathematical_rigor
+        value: mathematical rigor with formal proofs and derivations
+        
+      - display_name: Intuitive Analogies
+        name: intuitive_analogies
+        value: intuitive understanding through analogies
+
+  - display_name: Topic Coverage
+    name: topic_coverage
+    description: How broadly the topic should be covered
+    values:
+      - display_name: Exhaustive Coverage
+        name: exhaustive_coverage
+        value: exhaustive coverage including all aspects and edge cases
+        
+      - display_name: Comprehensive Standard Coverage
+        name: comprehensive_standard
+        value: comprehensive standard coverage of established knowledge
+        
+      - display_name: Core Fundamentals
+        name: core_fundamentals
+        value: core fundamentals and essential theoretical concepts
+        
+      - display_name: Focused on Key Principles
+        name: focused_essentials
+        value: focused on essential principles and key mechanisms
+        
+      - display_name: Progressive Learning Path
+        name: progressive_learning
+        value: progressive development from foundational to advanced concepts
+        
+      - display_name: Selective Deep Dive
+        name: selective_depth
+        value: selective deep coverage of critical theoretical aspects
+
+  - display_name: Question Formats
+    name: question_formats
+    description: Formats for question generation
+    values:
+      - display_name: Multiple Choice (Theory)
+        name: multiple_choice
+        value: multiple choice questions testing theoretical knowledge
+        
+      - display_name: Open-Ended Conceptual Questions
+        name: open_ended
+        value: open-ended conceptual understanding questions
+        
+      - display_name: Analytical Questions
+        name: analytical_questions
+        value: analytical questions exploring relationships and mechanisms
+        
+      - display_name: Comparative Analysis
+        name: comparative_analysis
+        value: comparative analysis between concepts and approaches
+        
+      - display_name: Theoretical Reasoning
+        name: theoretical_reasoning
+        value: theoretical reasoning and logical derivation questions
+        
+      - display_name: Definition and Terminology Questions
+        name: definitional_questions
+        value: precise definitional and terminological questions
+
+  - display_name: Question Purpose (inline)
+    name: question_purpose_inline
+    description: Purpose of generated questions (inline format)
+    values:
+      - display_name: Diagnose Knowledge Gaps
+        name: diagnose_gaps
+        value: diagnose theoretical knowledge gaps
+        
+      - display_name: Verify Deep Understanding
+        name: verify_understanding
+        value: verify deep conceptual understanding
+        
+      - display_name: Test Key Principles
+        name: test_comprehension
+        value: test comprehension of key principles
+        
+      - display_name: Explore Conceptual Connections
+        name: explore_connections
+        value: explore connections between concepts
+        
+      - display_name: Reinforce Fundamentals
+        name: reinforce_fundamentals
+        value: reinforce fundamental theoretical knowledge
+
+  - display_name: Question Purpose (block)
+    name: question_purpose
+    description: Purpose of generated questions
+    values:
+      - display_name: Diagnose Knowledge Gaps
+        name: diagnose_gaps_block
+        value: Systematically identify theoretical knowledge gaps and misconceptions. Create diagnostic questions that reveal specific areas where conceptual understanding is incomplete. Focus on fundamental prerequisites and theoretical foundations.
+        
+      - display_name: Verify Deep Understanding
+        name: verify_understanding_block
+        value: Verify deep conceptual understanding beyond memorization. Design questions that require explanation of mechanisms, relationships between concepts, and underlying theoretical principles.
+        
+      - display_name: Test Key Principles
+        name: test_comprehension_block
+        value: Test comprehensive understanding of key principles and theoretical frameworks. Focus on ability to explain how and why concepts work, their limitations, and theoretical foundations.
+        
+      - display_name: Explore Conceptual Connections
+        name: explore_connections_block
+        value: Explore conceptual connections and theoretical relationships. Create questions that reveal understanding of how different concepts relate, interact, and build upon each other within the theoretical framework.
+        
+      - display_name: Reinforce Fundamentals
+        name: reinforce_fundamentals_block
+        value: Reinforce fundamental theoretical knowledge through targeted questioning. Ensure solid understanding of core concepts, definitions, and theoretical principles that form the foundation of the subject.
+
+  - display_name: Number of Questions
+    name: question_quantity
+    description: Number of generated questions
+    values:
+      - display_name: 3 Questions
+        name: qty_3
+        value: "3"
+      - display_name: 5 Questions
+        name: qty_5
+        value: "5"
+      - display_name: 10 Questions
+        name: qty_10
+        value: "10"
+      - display_name: 15 Questions
+        name: qty_15
+        value: "15"
+      - display_name: 20 Questions
+        name: qty_20
+        value: "20"
+
+profiles:
+  # Subject profiles - configurations for subject areas
+  - name: ai_llm_profile
+    display_name: AI and Large Language Models
+    category: subject
+    description: Profile for studying modern LLMs, prompt engineering, and AI agents
+    settings:
+      subject_name: ai_llm
+      subject_keywords: ai_llm_keywords
+
+  - name: backend_profile
+    display_name: Backend Development
+    category: subject
+    description: Profile for studying backend technologies and system design
+    settings:
+      subject_name: backend_development
+      subject_keywords: backend_keywords
+
+  - name: frontend_profile
+    display_name: Frontend Development
+    category: subject
+    description: Profile for studying frontend technologies and web interfaces
+    settings:
+      subject_name: frontend_development
+      subject_keywords: frontend_keywords
+
+  - name: machine_learning_profile
+    display_name: Machine Learning
+    category: subject
+    description: Profile for studying machine learning and neural networks
+    settings:
+      subject_name: machine_learning
+      subject_keywords: ml_keywords
+
+  - name: mathematics_profile
+    display_name: Mathematics
+    category: subject
+    description: Profile for studying mathematical disciplines
+    settings:
+      subject_name: mathematics
+      subject_keywords: math_keywords
+
+  - name: cryptography_profile
+    display_name: Cryptography
+    category: subject
+    description: Profile for studying cryptography and information security
+    settings:
+      subject_name: cryptography
+      subject_keywords: crypto_keywords
+
+  - name: physics_profile
+    display_name: Physics
+    category: subject
+    description: Profile for studying physics and natural sciences
+    settings:
+      subject_name: physics
+      subject_keywords: physics_keywords
+
+  - name: chemistry_profile
+    display_name: Chemistry
+    category: subject
+    description: Profile for studying chemistry and chemical sciences
+    settings:
+      subject_name: chemistry
+      subject_keywords: chemistry_keywords
+
+  - name: biology_profile
+    display_name: Biology
+    category: subject
+    description: Profile for studying biology and life sciences
+    settings:
+      subject_name: biology
+      subject_keywords: biology_keywords
+
+  - name: computer_science_profile
+    display_name: Computer Science
+    category: subject
+    description: Profile for studying computer science and computational theory
+    settings:
+      subject_name: computer_science
+      subject_keywords: computer_science_keywords
+
+  - name: data_science_profile
+    display_name: Data Science
+    category: subject
+    description: Profile for studying data science and analytics
+    settings:
+      subject_name: data_science
+      subject_keywords: data_science_keywords
+
+  # Style profiles - three levels of theoretical exposition
+  - name: advanced_level
+    display_name: Advanced Level
+    category: style
+    description: The maximum theoretical depth for researchers is formal rigor and completeness.
+    settings:
+      expert_role: advanced_level
+      target_audience_inline: researchers
+      target_audience_block: researchers_block
+      style: academic_rigorous
+      language: english
+      explanation_depth: mathematical_rigor
+      topic_coverage: exhaustive_coverage
+      material_type_inline: theoretical_analysis
+      material_type_block: theoretical_analysis_block
+      question_formats: theoretical_reasoning
+      question_purpose_inline: verify_understanding
+      question_purpose: verify_understanding_block
+      question_quantity: qty_10
+
+  - name: intermediate_level
+    display_name: Intermediate Level
+    category: style
+    description: Deep understanding for professionals — explaining the mechanisms and principles of operation
+    settings:
+      expert_role: intermediate_level
+      target_audience_inline: intermediate_specialists
+      target_audience_block: intermediate_specialists_block
+      style: conceptual_focused
+      language: english
+      explanation_depth: intermediate_depth
+      topic_coverage: focused_essentials
+      material_type_inline: conceptual_overview
+      material_type_block: conceptual_overview_block
+      question_formats: analytical_questions
+      question_purpose_inline: explore_connections
+      question_purpose: explore_connections_block
+      question_quantity: qty_3
+
+  - name: beginner_level
+    display_name: Beginner Level
+    category: style
+    description: Basic knowledge for beginners — clear and consistent presentation of the basics
+    settings:
+      expert_role: beginner_level
+      target_audience_inline: complete_beginners
+      target_audience_block: complete_beginners_block
+      style: step_by_step
+      language: english
+      explanation_depth: surface_level
+      topic_coverage: core_fundamentals
+      material_type_inline: comprehensive_study
+      material_type_block: comprehensive_study_block
+      question_formats: definitional_questions
+      question_purpose_inline: reinforce_fundamentals
+      question_purpose: reinforce_fundamentals_block
+      question_quantity: qty_3

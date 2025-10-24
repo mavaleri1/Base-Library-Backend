@@ -1,0 +1,31 @@
+# Dockerfile for Prompt Configuration Service
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install UV package manager via pip
+RUN pip install --no-cache-dir uv
+
+# Copy workspace configuration
+COPY pyproject.toml ./
+COPY prompt-config-service/ ./prompt-config-service/
+COPY configs/ ./configs/
+
+# Install dependencies using UV
+RUN uv sync --no-dev
+
+# Expose port
+EXPOSE 8002
+
+# Health check
+HEALTHCHECK --interval=15s --timeout=10s --start-period=10s --retries=5 \
+    CMD curl -f http://localhost:8002/health || exit 1
+
+# Run migrations and start service
+CMD ["sh", "-c", "cd prompt-config-service && uv run alembic upgrade c541edc48932 && uv run alembic upgrade 954ed3a47a38 && uv run python -m main"]

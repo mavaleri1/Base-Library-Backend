@@ -1,0 +1,27 @@
+providers:
+  openai:
+    name: openai
+    api_key: "{{ env.OPENAI_API_KEY }}"
+    # base_url not specified - standard OpenAI API is used
+    supports_structured_output: true
+    default_model: gpt-4.1-mini
+
+  # OpenRouter - aggregator of different models
+  openrouter:
+    name: openrouter
+    api_key: "{{ env.OPENROUTER_API_KEY }}"
+    base_url: https://openrouter.ai/api/v1
+    supports_structured_output: false
+    default_model: google/gemini-2.5-pro
+  
+  # DeepSeek - OpenAI-compatible API (without structured output via response_format)
+  # Note: DeepSeek supports function calling, but does not support:
+  # 1. response_format for structured output
+  # 2. multimodal (image processing)
+  deepseek:
+    name: deepseek
+    api_key: "{{ env.DEEPSEEK_API_KEY }}"
+    base_url: https://api.deepseek.com
+    supports_structured_output: false  # Does not support response_format
+    supports_vision: false  # Does not support image processing
+    default_model: deepseek-chat

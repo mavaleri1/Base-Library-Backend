@@ -1,0 +1,11 @@
+[tool.uv.workspace]
+members = [
+ "core",
+ "artifacts-service",
+ "prompt-config-service",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+]
