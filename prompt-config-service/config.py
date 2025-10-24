@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     
     # Database
     database_url: str = Field(
-        default="postgresql://postgres:postgres@localhost:5431/prompts_config",
+        default="postgresql://postgres:postgres@localhost:5431/prompt_config",
         alias="PROMPT_CONFIG_DATABASE_URL",
         description="PostgreSQL database URL"
     )
