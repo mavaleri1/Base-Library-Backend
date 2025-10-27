@@ -201,8 +201,6 @@ ARTIFACTS_MAX_FILE_SIZE=10485760
 # Start all services
 docker-compose up -d
 
-# Start with LangFuse monitoring
-docker-compose --profile langfuse up -d
 ```
 
 ### Service Health Checks
@@ -212,15 +210,6 @@ docker-compose --profile langfuse up -d
 - **Prompt Strudio**: `http://localhost:8002/health`
 
 ## 📊 Monitoring & Observability
-
-### LangFuse Integration (Optional)
-
-The platform supports LangFuse for AI observability:
-
-- **LangFuse Web UI**: `http://localhost:3000`
-- **MinIO Console**: `http://localhost:9091`
-- **ClickHouse**: Analytics database
-- **Redis**: Caching layer
 
 ### Logging
 
