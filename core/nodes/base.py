@@ -49,7 +49,18 @@ class BaseWorkflowNode(ABC):
 
     def create_model(self) -> ChatOpenAI:
         """Creates model based on configuration for this node"""
-        return create_model_for_node(self.get_node_name())
+        node_name = self.get_node_name()
+        self.logger.info(f"🔍 [MODEL_CREATION] Creating model for node: {node_name}")
+        
+        model = create_model_for_node(node_name)
+        
+        self.logger.info(f"🔍 [MODEL_CREATION] Model created successfully:")
+        self.logger.info(f"🔍 [MODEL_CREATION] - Model name: {model.model_name}")
+        self.logger.info(f"🔍 [MODEL_CREATION] - Temperature: {model.temperature}")
+        self.logger.info(f"🔍 [MODEL_CREATION] - Max tokens: {model.max_tokens}")
+        self.logger.info(f"🔍 [MODEL_CREATION] - Base URL: {getattr(model, 'openai_api_base', 'default')}")
+        
+        return model
 
     def _init_security(self):
         """Initialize SecurityGuard with configuration via yaml"""

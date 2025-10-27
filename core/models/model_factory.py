@@ -50,6 +50,13 @@ class ModelFactory:
                 f"Please use a provider with structured output support (e.g., 'openai', 'fireworks')"
             )
         
+        # Check vision support
+        if getattr(config, 'requires_vision', False) and not getattr(provider_config, 'supports_vision', False):
+            raise ValueError(
+                f"Provider '{config.provider}' does not support vision required by this node. "
+                f"Please use a provider with vision support (e.g., 'openai')"
+            )
+        
         # Collect parameters for ChatOpenAI
         model_params = {
             "model": config.model_name,
@@ -73,12 +80,19 @@ class ModelFactory:
         if config.presence_penalty is not None:
             model_params["presence_penalty"] = config.presence_penalty
         
-        logger.debug(
-            f"Creating model for provider '{config.provider}' with model '{config.model_name}', "
-            f"base_url='{provider_config.base_url}'"
-        )
+        logger.info(f"🔍 [MODEL_FACTORY] Creating model:")
+        logger.info(f"🔍 [MODEL_FACTORY] - Provider: {config.provider}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Model name: {config.model_name}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Base URL: {provider_config.base_url}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Temperature: {config.temperature}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Max tokens: {config.max_tokens}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Supports structured output: {provider_config.supports_structured_output}")
+        logger.info(f"🔍 [MODEL_FACTORY] - Supports vision: {getattr(provider_config, 'supports_vision', 'N/A')}")
         
-        return ChatOpenAI(**model_params)
+        model = ChatOpenAI(**model_params)
+        logger.info(f"🔍 [MODEL_FACTORY] Model created successfully with parameters: {model_params}")
+        
+        return model
     
     def create_model_for_node(self, node_name: str) -> ChatOpenAI:
         """

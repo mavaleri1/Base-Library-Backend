@@ -180,6 +180,17 @@ class RecognitionNode(BaseWorkflowNode):
 
             # Get personalized prompt from service
             system_content = await self.get_system_prompt(state, config)
+            
+            # Log prompt details
+            logger.info(f"🔍 [RECOGNITION] System prompt details:")
+            logger.info(f"🔍 [RECOGNITION] - Length: {len(system_content)} chars")
+            logger.info(f"🔍 [RECOGNITION] - Full prompt: {system_content}")
+            
+            # Check if prompt contains vision-related instructions
+            vision_keywords = ['image', 'vision', 'see', 'look', 'recognize', 'text', 'handwritten', 'notes']
+            prompt_lower = system_content.lower()
+            found_keywords = [kw for kw in vision_keywords if kw in prompt_lower]
+            logger.info(f"🔍 [RECOGNITION] - Vision keywords found: {found_keywords}")
 
             # Create content with images for GPT-4-vision
             user_content = [
@@ -203,17 +214,82 @@ class RecognitionNode(BaseWorkflowNode):
                 HumanMessage(content=user_content),
             ]
 
+            # Log request details
+            logger.info(f"🔍 [RECOGNITION] Sending request to OpenAI API")
+            logger.info(f"🔍 [RECOGNITION] Model: {self.model.model_name}")
+            logger.info(f"🔍 [RECOGNITION] Temperature: {self.model.temperature}")
+            logger.info(f"🔍 [RECOGNITION] Max tokens: {self.model.max_tokens}")
+            logger.info(f"🔍 [RECOGNITION] System prompt length: {len(system_content)} chars")
+            logger.info(f"🔍 [RECOGNITION] Number of images: {len(base64_images)}")
+            logger.info(f"🔍 [RECOGNITION] System prompt preview: {system_content[:200]}...")
+            
+            # Log message structure
+            logger.info(f"🔍 [RECOGNITION] Message structure:")
+            logger.info(f"🔍 [RECOGNITION] - Number of messages: {len(messages)}")
+            for i, msg in enumerate(messages):
+                logger.info(f"🔍 [RECOGNITION] - Message {i}: {type(msg).__name__}")
+                if hasattr(msg, 'content'):
+                    if isinstance(msg.content, list):
+                        logger.info(f"🔍 [RECOGNITION]   - Content type: list with {len(msg.content)} items")
+                        for j, item in enumerate(msg.content):
+                            if isinstance(item, dict):
+                                logger.info(f"🔍 [RECOGNITION]   - Item {j}: {item.get('type', 'unknown')}")
+                                if item.get('type') == 'image_url':
+                                    img_url = item.get('image_url', {}).get('url', '')
+                                    logger.info(f"🔍 [RECOGNITION]   - Image URL length: {len(img_url)} chars")
+                                    logger.info(f"🔍 [RECOGNITION]   - Image URL preview: {img_url[:100]}...")
+                            else:
+                                logger.info(f"🔍 [RECOGNITION]   - Item {j}: {str(item)[:100]}...")
+                    else:
+                        logger.info(f"🔍 [RECOGNITION]   - Content type: {type(msg.content)}")
+                        logger.info(f"🔍 [RECOGNITION]   - Content length: {len(str(msg.content))} chars")
+                        logger.info(f"🔍 [RECOGNITION]   - Content preview: {str(msg.content)[:200]}...")
+
             # Send request to model
             response = await self.model.ainvoke(messages)
 
-            # Process response (remove reasoning section)
+            # Log response details
+            logger.info(f"🔍 [RECOGNITION] Received response from OpenAI API")
+            logger.info(f"🔍 [RECOGNITION] Response type: {type(response)}")
+            logger.info(f"🔍 [RECOGNITION] Response attributes: {dir(response)}")
+            
+            # Check for different response formats
+            if hasattr(response, 'content'):
+                logger.info(f"🔍 [RECOGNITION] Response content length: {len(response.content)}")
+                logger.info(f"🔍 [RECOGNITION] Response content preview: {response.content[:200]}...")
+                logger.info(f"🔍 [RECOGNITION] Response content full: {response.content}")
+            elif hasattr(response, 'text'):
+                logger.info(f"🔍 [RECOGNITION] Response text length: {len(response.text)}")
+                logger.info(f"🔍 [RECOGNITION] Response text preview: {response.text[:200]}...")
+                logger.info(f"🔍 [RECOGNITION] Response text full: {response.text}")
+            elif hasattr(response, 'message'):
+                logger.info(f"🔍 [RECOGNITION] Response message: {response.message}")
+                if hasattr(response.message, 'content'):
+                    logger.info(f"🔍 [RECOGNITION] Response message content: {response.message.content}")
+            else:
+                logger.warning(f"🔍 [RECOGNITION] Unknown response format: {response}")
+                logger.warning(f"🔍 [RECOGNITION] Response str: {str(response)}")
+            
+            # Check if response has expected attributes
+            if not hasattr(response, 'content'):
+                logger.error(f"🔍 [RECOGNITION] Response missing 'content' attribute. Available attributes: {dir(response)}")
+                return ""
+
+            # Process response (remove reasoning section if present)
             content = response.content
+            logger.info(f"🔍 [RECOGNITION] Raw content length: {len(content)} chars")
+            
             if "[END OF REASONING]" in content:
-                content = content.split("[END OF REASONING]")[1].strip()
+                # Remove the [END OF REASONING] marker and any text before it
+                # since it's at the end according to logs
+                content = content.replace("[END OF REASONING]", "").strip()
+                logger.info(f"🔍 [RECOGNITION] Removed [END OF REASONING] marker, final length: {len(content)} chars")
 
             # Validation of recognized text from handwritten notes
             if self.security_guard and content:
+                logger.info(f"🔍 [RECOGNITION] Running security validation on content")
                 content = await self.validate_input(content)
+                logger.info(f"🔍 [RECOGNITION] Security validation completed, final content length: {len(content)} chars")
 
             elapsed = time.time() - start_time
             if elapsed > 5.0:
@@ -221,8 +297,18 @@ class RecognitionNode(BaseWorkflowNode):
             else:
                 logger.info(f"Image recognition completed in {elapsed:.2f}s, text length: {len(content)} chars")
             
+            # Final validation
+            if not content or len(content.strip()) == 0:
+                logger.warning(f"🔍 [RECOGNITION] WARNING: Empty content after processing!")
+                logger.warning(f"🔍 [RECOGNITION] Raw response was: {response.content[:500] if hasattr(response, 'content') else 'No content'}")
+            else:
+                logger.info(f"🔍 [RECOGNITION] SUCCESS: Recognized text with {len(content)} characters")
+            
             return content
 
         except Exception as e:
             logger.error(f"Error in image processing: {e}")
+            logger.error(f"🔍 [RECOGNITION] Exception details: {type(e).__name__}: {str(e)}")
+            import traceback
+            logger.error(f"🔍 [RECOGNITION] Traceback: {traceback.format_exc()}")
             return ""

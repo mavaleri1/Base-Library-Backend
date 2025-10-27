@@ -16,6 +16,10 @@ class ProviderConfig(BaseModel):
         default=False, 
         description="Whether this provider supports structured output (function calling)"
     )
+    supports_vision: bool = Field(
+        default=False,
+        description="Whether this provider supports vision (image processing)"
+    )
     default_model: Optional[str] = Field(default=None, description="Default model for this provider")
 
 
@@ -41,6 +45,7 @@ class ModelConfig(BaseModel):
     
     # Node requirements
     requires_structured_output: bool = Field(default=False, description="Node requires structured output support")
+    requires_vision: bool = Field(default=False, description="Node requires vision support")
 
 
 class LLMModelsConfig(BaseModel):
