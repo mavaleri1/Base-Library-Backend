@@ -46,7 +46,7 @@ graph TD
 - **Purpose**: Generates educational material based on exam questions
 - **Functionality**:
   - Creates comprehensive study materials
-  - Uses personalized prompts from Prompt Configuration Service
+  - Uses personalized prompts from Prompt Strudio Service
   - Determines workflow path (recognition vs. direct question generation)
 
 #### 3. **Recognition Node** (`recognition_handwritten`)
@@ -149,7 +149,7 @@ Each node can be configured with different models based on requirements.
   - Thread-based organization
   - Web3 authentication support
 
-### Prompt Configuration Service (Port 8002)
+### Prompt Studio Service (Port 8002)
 - **Framework**: FastAPI
 - **Functionality**:
   - Dynamic prompt generation
@@ -175,8 +175,6 @@ OPENAI_API_KEY=your_openai_key
 DATABASE_URL=postgresql://postgres:postgres@postgres:5432/core
 
 # Optional LLM Providers
-OPENROUTER_API_KEY=your_openrouter_key
-FIREWORKS_API_KEY=your_fireworks_key
 DEEPSEEK_API_KEY=your_deepseek_key
 
 # Security
@@ -210,8 +208,8 @@ docker-compose --profile langfuse up -d
 ### Service Health Checks
 
 - **Core**: `http://localhost:8000/health`
-- **Artifacts**: `http://localhost:8001/health`
-- **Prompt Config**: `http://localhost:8002/health`
+- **Article**: `http://localhost:8001/health`
+- **Prompt Strudio**: `http://localhost:8002/health`
 
 ## 📊 Monitoring & Observability
 
@@ -256,10 +254,7 @@ The platform implements sophisticated HITL patterns:
 - Interactive question generation
 
 ### Export Capabilities
-- PDF export with custom templates
 - Markdown export for documentation
-- ZIP archives for complete packages
-- Custom styling and formatting
 
 ### Web3 Integration
 - Blockchain authentication
@@ -293,7 +288,7 @@ The platform implements sophisticated HITL patterns:
 - `POST /export/pdf/{thread_id}/{session_id}` - Export to PDF
 - `POST /export/markdown/{thread_id}/{session_id}` - Export to Markdown
 
-### Prompt Configuration Endpoints
+### Prompt Studio Endpoints
 - `GET /prompts/{user_id}/{node_name}` - Get personalized prompts
 - `POST /profiles` - Create user profiles
 - `PUT /profiles/{profile_id}` - Update user profiles
